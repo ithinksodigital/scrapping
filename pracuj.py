@@ -3,7 +3,7 @@ import requests
 import re
 
 
-def pracuj_pl(link):
+def pracuj_pl(link, name=''):
     try:
         page_response = requests.get(link, timeout=5).text
         page_content = BeautifulSoup(page_response, 'lxml')
@@ -11,7 +11,7 @@ def pracuj_pl(link):
         data_into_str = data[0].text.strip()
         rm_str = re.sub('[^0-9]', '', data_into_str)
         int(rm_str)
-        print('Pracuj.pl: ' + rm_str)
+        print('Pracuj.pl: ' + rm_str + " " + name)
     except:
         print('Sorry, timeout. ')
 
@@ -56,7 +56,7 @@ def infopraca_pl(link):
 
 print('''Hays
 ''')
-pracuj_pl('https://www.pracuj.pl/praca/Hays%20Poland;en')
+pracuj_pl('https://www.pracuj.pl/praca/Hays%20Poland;en', name = 'Hays')
 praca_pl('https://www.praca.pl/s-hays,poland,sp,z,o-o.html?p=Hays+Poland+Sp.++z+o.o.%2C+')
 golden_line('https://www.goldenline.pl/praca/szukaj?query=hays+poland')
 infopraca_pl('https://www.infopraca.pl/praca?q=hays+poland&lc=')
