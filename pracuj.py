@@ -1,107 +1,143 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+from flask import Flask, jsonify, render_template
 
 
-def pracuj_pl(link, name=''):
-    try:
-        page_response = requests.get(link, timeout=5).text
-        page_content = BeautifulSoup(page_response, 'lxml')
-        data = page_content.find_all(class_='o__search_results_title_number')
-        data_into_str = data[0].text.strip()
-        rm_str = re.sub('[^0-9]', '', data_into_str)
-        int(rm_str)
-        print('Pracuj.pl: ' + rm_str + " " + name)
-    except:
-        print('Sorry, timeout. ')
+app = Flask(__name__)
+
+d = {}
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/pracuj')
+def pracuj():
+    def pracuj_pl(link, name=''):
+        try:
+            page_response = requests.get(link, timeout=1).text
+            page_content = BeautifulSoup(page_response, 'lxml')
+            data = page_content.find_all(class_='o__search_results_title_number')
+            data_into_str = data[0].text.strip()
+            rm_str = re.sub('[^0-9]', '', data_into_str)
+            int(rm_str)
+            new_entry = {
+                name : rm_str
+            }
+
+        except TimeoutError:
+            print('Sorry, timeout. ')
+
+        d.update(new_entry)
+
+    pracuj_pl('https://www.pracuj.pl/praca/Hays%20Poland;en', name = 'Hays')
+    pracuj_pl('https://www.pracuj.pl/praca/grafton;kw', name='Grafton')
+    pracuj_pl('https://www.pracuj.pl/praca/HRK%20S.A.;en', name='HRK')
+    pracuj_pl('https://www.pracuj.pl/praca/devire;en', name='Devire')
+    pracuj_pl('https://www.pracuj.pl/praca/Manpower;en', name='Manpower')
+    pracuj_pl('https://www.pracuj.pl/praca/Randstad%20Polska;en', name='Randstad')
+    pracuj_pl('https://www.pracuj.pl/praca/antal;en', name='Antal')
+
+    return jsonify(d)
 
 
-def praca_pl(link):
-    try:
-        page_response = requests.get(link, timeout=5).text
-        page_content = BeautifulSoup(page_response, 'lxml')
-        data = page_content.find_all(class_='margin-bottom-20 padding-left-20')
-        data_into_str = data[0].text.strip()
-        rm_str = re.sub('[^0-9]', '', data_into_str)
-        int(rm_str)
-        print('Praca.pl: ' + rm_str)
-    except:
-        print('Sorry, timeout. ')
+@app.route('/praca')
+def praca():
+    def praca_pl(link, name=''):
+        try:
+            page_response = requests.get(link, timeout=5).text
+            page_content = BeautifulSoup(page_response, 'lxml')
+            data = page_content.find_all(class_='margin-bottom-20 padding-left-20')
+            data_into_str = data[0].text.strip()
+            rm_str = re.sub('[^0-9]', '', data_into_str)
+            int(rm_str)
+            new_entry = {
+                name : rm_str
+            }
+
+        except:
+            new_entry = {
+                name : "0"
+            }
+
+        d.update(new_entry)
 
 
-def golden_line(link):
-    try:
-        page_response = requests.get(link, timeout=5).text
-        page_content = BeautifulSoup(page_response, 'lxml')
-        data = page_content.find_all(class_='count')
-        data_into_str = data[0].text.strip()
-        rm_str = re.sub('[^0-9]', '', data_into_str)
-        int(rm_str)
-        print('GoldenLine: ' + rm_str)
-    except:
-        print('Sorry, timeout. ')
+    praca_pl('https://www.praca.pl/s-devire.html?p=devire', name='Devire')
+    praca_pl('https://www.praca.pl/s-manpower.html?p=manpower', name="Manpower")
+    praca_pl('https://www.praca.pl/s-antal.html?p=antal', name='Antal')
+    praca_pl('https://www.praca.pl/s-randstad.html?p=randstad', name='Randstad')
+    praca_pl('https://www.praca.pl/s-grafton.html?p=grafton', name='Grafton')
+    praca_pl('https://www.praca.pl/s-hrk.html?p=hrk')
+    praca_pl('https://www.praca.pl/s-hays,poland,sp,z,o-o.html?p=Hays+Poland+Sp.++z+o.o.%2C+', name='Hays')
+
+    return jsonify(d)
 
 
-def infopraca_pl(link):
-    try:
-        page_response = requests.get(link, timeout=5).text
-        page_content = BeautifulSoup(page_response, 'lxml')
-        data = page_content.find_all(class_='list-title')
-        data_into_str = data[0].text.strip()
-        rm_str = re.sub('[^0-9]', '', data_into_str)
-        int(rm_str)
-        print('InfoPraca: ' + rm_str)
-    except:
-        print('Sorry, timeout. ')
+@app.route('/goldenline')
+def goldenline():
+    def golden_line(link, name=''):
+        try:
+            page_response = requests.get(link, timeout=5).text
+            page_content = BeautifulSoup(page_response, 'lxml')
+            data = page_content.find_all(class_='count')
+            data_into_str = data[0].text.strip()
+            rm_str = re.sub('[^0-9]', '', data_into_str)
+            int(rm_str)
+            new_entry = {
+                name : rm_str
+            }
+
+        except:
+            new_entry = {
+                name : "0"
+            }
+
+        d.update(new_entry)
+
+    golden_line('https://www.goldenline.pl/praca/szukaj?query=hays+poland', name='Hays')
+    golden_line('https://www.goldenline.pl/praca/szukaj?query=grafton', name='Grafton')
+    golden_line('https://www.goldenline.pl/praca/szukaj?query=randstad', name='Randstad')
+    golden_line('https://www.goldenline.pl/praca/szukaj?query=antal', name='Antal')
+    golden_line('https://www.goldenline.pl/praca/szukaj?query=manpower', name='Manpower')
+    golden_line('https://www.goldenline.pl/praca/szukaj?query=devire', name='Devire')
+    golden_line('https://www.goldenline.pl/praca/szukaj?query=hrk+sa' , name='HRK')
+
+    return jsonify(d)
+
+@app.route('/infopraca')
+def infopraca():
+    def infopraca_pl(link, name=''):
+        try:
+            page_response = requests.get(link, timeout=5).text
+            page_content = BeautifulSoup(page_response, 'lxml')
+            data = page_content.find_all(class_='list-title')
+            data_into_str = data[0].text.strip()
+            rm_str = re.sub('[^0-9]', '', data_into_str)
+            int(rm_str)
+            new_entry = {
+                name : rm_str
+            }
+
+        except:
+            new_entry = {
+                name : "0"
+            }
+
+        d.update(new_entry)
 
 
-print('''--------------
-Hays
---------------''')
-pracuj_pl('https://www.pracuj.pl/praca/Hays%20Poland;en', name = 'Hays')
-praca_pl('https://www.praca.pl/s-hays,poland,sp,z,o-o.html?p=Hays+Poland+Sp.++z+o.o.%2C+')
-golden_line('https://www.goldenline.pl/praca/szukaj?query=hays+poland')
-infopraca_pl('https://www.infopraca.pl/praca?q=hays+poland&lc=')
+    infopraca_pl('https://www.infopraca.pl/praca?q=hays+poland&lc=', name='Hays')
+    infopraca_pl('https://www.infopraca.pl/praca?q=grafton&lc=', name='Grafton')
+    infopraca_pl('https://www.infopraca.pl/praca?q=randstad&lc=', name='Randstad')
+    infopraca_pl('https://www.infopraca.pl/praca?q=antal&lc=', name='Antal')
+    infopraca_pl('https://www.infopraca.pl/praca?q=manpower&lc=', name='Manpower')
+    infopraca_pl('https://www.infopraca.pl/praca?q=devire&lc=', name='Devire')
+    infopraca_pl('https://www.infopraca.pl/praca?q=hrk&lc=', name='HRK')
 
-print('''--------------
-Grafton
---------------''')
-pracuj_pl('https://www.pracuj.pl/praca/grafton;kw')
-praca_pl('https://www.praca.pl/s-grafton.html?p=grafton')
-golden_line('https://www.goldenline.pl/praca/szukaj?query=grafton')
-infopraca_pl('https://www.infopraca.pl/praca?q=grafton&lc=')
-print('''--------------
-Randstad
---------------''')
-pracuj_pl('https://www.pracuj.pl/praca/Randstad%20Polska;en')
-praca_pl('https://www.praca.pl/s-randstad.html?p=randstad')
-golden_line('https://www.goldenline.pl/praca/szukaj?query=randstad')
-infopraca_pl('https://www.infopraca.pl/praca?q=randstad&lc=')
-print('''--------------
-Antal
---------------''')
-pracuj_pl('https://www.pracuj.pl/praca/antal;en')
-praca_pl('https://www.praca.pl/s-antal.html?p=antal')
-golden_line('https://www.goldenline.pl/praca/szukaj?query=antal')
-infopraca_pl('https://www.infopraca.pl/praca?q=antal&lc=')
-print('''--------------
-Manpower
---------------''')
-pracuj_pl('https://www.pracuj.pl/praca/Manpower;en')
-praca_pl('https://www.praca.pl/s-manpower.html?p=manpower')
-golden_line('https://www.goldenline.pl/praca/szukaj?query=manpower')
-infopraca_pl('https://www.infopraca.pl/praca?q=manpower&lc=')
-print('''--------------
-Devire
---------------''')
-pracuj_pl('https://www.pracuj.pl/praca/devire;en')
-praca_pl('https://www.praca.pl/s-devire.html?p=devire')
-golden_line('https://www.goldenline.pl/praca/szukaj?query=devire')
-infopraca_pl('https://www.infopraca.pl/praca?q=devire&lc=')
-print('''--------------
-HRK S.A.
---------------''')
-pracuj_pl('https://www.pracuj.pl/praca/HRK%20S.A.;en')
-praca_pl('https://www.praca.pl/s-hrk.html?p=hrk')
-golden_line('https://www.goldenline.pl/praca/szukaj?query=hrk+sa')
-infopraca_pl('https://www.infopraca.pl/praca?q=hrk&lc=')
+    return jsonify(d)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
