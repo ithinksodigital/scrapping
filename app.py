@@ -12,6 +12,7 @@ d = {}
 def index():
     return render_template('index.html')
 
+
 @app.route('/pracuj')
 def pracuj():
     def pracuj_pl(link, name=''):
@@ -136,6 +137,34 @@ def infopraca():
     infopraca_pl('https://www.infopraca.pl/praca?q=devire&lc=', name='Devire')
     infopraca_pl('https://www.infopraca.pl/praca?q=hrk&lc=', name='HRK')
 
+    return jsonify(d)
+
+
+@app.route('/manpower')
+def manpower():
+    def manpower_pl(link, name=''):
+        try:
+            page_response = requests.get(link, timeout=5).text
+            page_content = BeautifulSoup(page_response, 'lxml')
+            data = page_content.find_all(class_='intro')
+            data_into_str = data[0].text.strip()
+            rm_str = re.sub('[^0-9]', '', data_into_str)
+            int(rm_str)
+            new_entry = {
+                name : rm_str
+            }
+
+        except:
+            new_entry = {
+                name : "0"
+            }
+
+        d.update(new_entry)
+
+    manpower_pl('https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3001&hrlink_location=&hrlink_type=&hrlink_submitSearch=1', name='Administracja /Sekretariat/ Tlumaczenia')
+    manpower_pl('https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3003&hrlink_location=&hrlink_type=&hrlink_submitSearch=1', name='Architektura/ Budownictwo')
+    manpower_pl('https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3002&hrlink_location=&hrlink_type=&hrlink_submitSearch=1', name='AGD')
+    manpower_pl('https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3004&hrlink_location=&hrlink_type=&hrlink_submitSearch=1', name='Energetyka/Gazownictwo')
     return jsonify(d)
 
 
