@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import re
 
 a = {}
 
@@ -7,12 +8,11 @@ a = {}
 def antal_pl(link, name=''):
     try:
         page_response = requests.get(link, timeout=10).text
-        page_content = BeautifulSoup(page_response, 'lxml').find_all(class_ = 'jobs_page')
-        data_into_str = page_content[0].text.strip()
-        true_data = data_into_str[91:93]
+        page_content = BeautifulSoup(page_response, 'lxml').find(class_='header').find_next_sibling().text.strip()
+        rm_str = re.sub( '[^0-9]', '', page_content )
 
         new_entry = {
-            name: int(true_data)
+            name: int(rm_str)
         }
 
     except:
