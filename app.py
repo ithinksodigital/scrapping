@@ -1,5 +1,5 @@
+import sys
 from flask import Flask, jsonify, render_template
-from pracujpl import *
 from pracapl import *
 from infopracapl import *
 from goldenlinepl import *
@@ -14,6 +14,8 @@ from experispl import *
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
+sys.path.insert(0, '/src/')
+
 
 
 @app.route('/')
