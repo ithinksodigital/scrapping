@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
-
-ha = {}
+import os
+import csv
+ha = []
 
 
 def hays_pl(link, name=''):
@@ -9,17 +10,21 @@ def hays_pl(link, name=''):
         page_response = requests.get(link, timeout=10).text
         page_content = BeautifulSoup(page_response, 'lxml').find_all(class_ = 'count')
         data_into_str = page_content[0].text.strip()
-        new_entry = {
-            name: int(data_into_str)
-        }
 
+        new_entry = {
+            "company_name": "Hays",
+            "category": name,
+            "offers": int( data_into_str )
+        }
     except:
 
         new_entry = {
-            name: 0
+            "company_name": "Hays",
+            "category": name,
+            "offers": "not received"
         }
 
-    ha.update(new_entry)
+    ha.extend( [new_entry] )
 
 def hays_scrap():
     hays_pl('https://m.hays.pl/search/?q=hays&f=xjobType%5B%22P%22%5D%5B%22Sta%C5%82a%22%5D&f=xIndustry%5B%22Badania+i+Rozw%C3%B3j+%26+Nauka%22%5D%5B%22Badania+i+Rozw%C3%B3j+%26+Nauka%22%5D&locationLevel=&location=&locationSet=&locationId=',
@@ -70,3 +75,31 @@ def hays_scrap():
             'Telekomunikacja')
     hays_pl('https://m.hays.pl/search/?q=hays&f=xjobType%5B%22P%22%5D%5B%22Sta%C5%82a%22%5D&f=xIndustry%5B%22Ubezpieczenia%22%5D%5B%22Ubezpieczenia%22%5D&locationLevel=&location=&locationSet=&locationId=',
             'Ubezpieczenia')
+
+
+def hays_export():
+    global ha
+    test = []
+
+    for document in ha:
+        event_obj = {}
+        event_obj['company_name'] = document['company_name']
+        event_obj['category'] = document['category']
+        event_obj['offers'] = document['offers']
+        test.append( event_obj )
+
+    try:
+        os.remove( 'export/hays.csv' )
+        with open( 'export/hays.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+            fields = ['category', 'offerts']
+            writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
+            writer.writeheader()
+            writer.writerows( test )
+    except:
+        with open( 'export/hays.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+            fields = ['company_name', 'category', 'offers']
+            writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
+            writer.writeheader()
+            writer.writerows( test )
+
+    ha = []

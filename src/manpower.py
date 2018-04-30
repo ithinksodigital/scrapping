@@ -1,8 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+import os
+import csv
 
-m = {}
+m = []
 
 
 def manpower_pl(link, name=''):
@@ -13,15 +15,21 @@ def manpower_pl(link, name=''):
         data_into_str = data[0].text.strip()
         rm_str = re.sub('[^0-9]', '', data_into_str)
         int(rm_str)
+
         new_entry = {
-            name: rm_str
+            "company_name": "Manpower",
+            "category": name,
+            "offers": int( rm_str )
+        }
+    except:
+
+        new_entry = {
+            "company_name": "Manpowers",
+            "category": name,
+            "offers": "not received"
         }
 
-    except:
-        new_entry = {
-            name: "0"
-        }
-    m.update(new_entry)
+    m.extend( [new_entry] )
 
 def manpower_scrap():
     manpower_pl(
@@ -147,3 +155,30 @@ def manpower_scrap():
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3041&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
         name='Uslugi wodociagowe, kanalizacyjne i gospodarka odpadami')
+
+def manpower_export():
+    global m
+    test = []
+
+    for document in m:
+        event_obj = {}
+        event_obj['company_name'] = document['company_name']
+        event_obj['category'] = document['category']
+        event_obj['offers'] = document['offers']
+        test.append( event_obj )
+
+    try:
+        os.remove( 'export/manpower.csv' )
+        with open( 'export/manpower.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+            fields = ['category', 'offerts']
+            writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
+            writer.writeheader()
+            writer.writerows( test )
+    except:
+        with open( 'export/manpower.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+            fields = ['company_name', 'category', 'offers']
+            writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
+            writer.writeheader()
+            writer.writerows( test )
+
+    m = []

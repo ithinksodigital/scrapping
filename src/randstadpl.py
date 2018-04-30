@@ -1,8 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+import os
+import csv
 
-ra = {}
+ra = []
 
 def randstad_pl(string, name=""):
     try:
@@ -13,15 +15,19 @@ def randstad_pl(string, name=""):
         rm_str = re.sub('[^0-9]', '', data_into_str)
 
         new_entry = {
-            name: int(rm_str )
+            "company_name": "Randstad",
+            "category": name,
+            "offers": int( rm_str )
         }
     except:
 
         new_entry = {
-            name: 0
+            "company_name": "Randstad",
+            "category": name,
+            "offers": "not received"
         }
 
-    ra.update(new_entry)
+    ra.extend( [new_entry] )
 
 def randstad_scrap():
     randstad_pl('produkcja/','produkcja' )
@@ -53,4 +59,29 @@ def randstad_scrap():
     randstad_pl( 'lancuch-dostaw', 'lancuch dostaw' )
 
 
+def randstad_export():
+    global ra
+    test = []
 
+    for document in ra:
+        event_obj = {}
+        event_obj['company_name'] = document['company_name']
+        event_obj['category'] = document['category']
+        event_obj['offers'] = document['offers']
+        test.append( event_obj )
+
+    try:
+        os.remove( 'export/randstad.csv' )
+        with open( 'export/randstad.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+            fields = ['category', 'offerts']
+            writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
+            writer.writeheader()
+            writer.writerows( test )
+    except:
+        with open( 'export/randstad.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+            fields = ['company_name', 'category', 'offers']
+            writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
+            writer.writeheader()
+            writer.writerows( test )
+
+    ra = []
