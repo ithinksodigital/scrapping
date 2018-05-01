@@ -63,7 +63,6 @@ def manpower():
 
 @app.route('/experis')
 def experis():
-
     company_name = 'Experis'
     experis_scrap()
     experis_export("Experis")
@@ -72,7 +71,6 @@ def experis():
 
 @app.route('/antal')
 def antal():
-
     company_name='Antal'
     antal_scrap()
     antal_export('Antal')
