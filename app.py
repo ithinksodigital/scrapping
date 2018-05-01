@@ -1,11 +1,12 @@
 import sys
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, send_file, request
 from pracapl import *
 from infopracapl import *
 from goldenlinepl import *
 from manpower import *
 from antalpl import *
 from graftonpl import *
+from pracujpl import *
 from randstadpl import *
 from hrkpl import *
 from hayspl import *
@@ -14,13 +15,13 @@ from experispl import *
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
-sys.path.insert(1, '/src/')
 
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/pracuj')
 def pracuj():
@@ -53,16 +54,20 @@ def manpower():
 
 @app.route('/experis')
 def experis():
+
+    company_name = 'Experis'
     experis_scrap()
-    experis_export()
-    return jsonify(e)
+    experis_export("Experis")
+    return render_template('company.html', data=e, company_name=company_name)
 
 
 @app.route('/antal')
 def antal():
+
+    company_name='Antal'
     antal_scrap()
     antal_export()
-    return jsonify(a)
+    return render_template('company.html', data=a, company_name=company_name)
 
 @app.route('/grafton')
 def grafton():
@@ -87,6 +92,15 @@ def hays():
     hays_scrap()
     hays_export()
     return jsonify(ha)
+
+
+@app.route('/getCSV', methods=['GET'])
+def plot_csv():
+    company_name = request.args.get( 'company_name' )
+    return send_file('export/%s.csv' %company_name,
+                     mimetype='text/csv',
+                     attachment_filename='%s.csv' %company_name,
+                     as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)

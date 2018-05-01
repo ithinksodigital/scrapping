@@ -7,31 +7,33 @@ import os
 a = []
 
 
-def antal_pl(link, name=''):
+def antal_pl(link, name='', company_name='Antal'):
     try:
         page_response = requests.get( link, timeout=10 ).text
         page_content = BeautifulSoup( page_response, 'lxml' ).find( class_='header' ).find_next_sibling().text.strip()
         rm_str = re.sub( '[^0-9]', '', page_content )
 
         new_entry = {
-            "company_name": "Antal",
+            "company_name": company_name,
             "category": name,
             "offers": int( rm_str )
         }
     except:
 
         new_entry = {
-            "company_name": "Antal",
+            "company_name": company_name,
             "category": name,
             "offers": "not received"
         }
 
     a.extend( [new_entry] )
+    return a
+    return company_name
 
 
 def antal_scrap():
-    antal_pl( 'https://antal.pl/oferty-pracy?s=&sid=&did=Accountancy', 'Accontancy' )
-    antal_pl( 'https://antal.pl/oferty-pracy?s=&sid=&did=Actuaries', 'Actuaries' )
+    antal_pl( 'https://antal.pl/oferty-pracy?s=&sid=&did=Accountancy', 'Accontancy', 'Antal' )
+    antal_pl( 'https://antal.pl/oferty-pracy?s=&sid=&did=Actuaries', 'Actuaries', 'Antal' )
     antal_pl( 'https://antal.pl/oferty-pracy?s=&sid=&did=Administration+Support', 'Administration Supoort' )
     antal_pl( 'https://antal.pl/oferty-pracy?s=&sid=&did=Banking%2C+Financial+Services+%26+Investment',
               'Banking, Financial services & Investment' )
