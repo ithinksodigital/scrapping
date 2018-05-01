@@ -7,7 +7,7 @@ import csv
 m = []
 
 
-def manpower_pl(link, name=''):
+def manpower_pl(link, name='', comapny_name=''):
     try:
         page_response = requests.get(link, timeout=5).text
         page_content = BeautifulSoup(page_response, 'lxml')
@@ -17,146 +17,148 @@ def manpower_pl(link, name=''):
         int(rm_str)
 
         new_entry = {
-            "company_name": "Manpower",
+            "company_name": comapny_name,
             "category": name,
             "offers": int( rm_str )
         }
     except:
 
         new_entry = {
-            "company_name": "Manpowers",
+            "company_name": comapny_name,
             "category": name,
             "offers": "not received"
         }
 
     m.extend( [new_entry] )
+    return m
+    return company_name
 
 def manpower_scrap():
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3001&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Administracja /Sekretariat/ Tlumaczenia')
+        'Administracja /Sekretariat/ Tlumaczenia', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3002&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='AGD/ Sprzet elektryczny')
+        'AGD/ Sprzet elektryczny', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3003&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Architektura/ Budownictwo')
+        'Architektura/ Budownictwo', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3004&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Energetyka/ Gazownictwo')
+        'Energetyka/ Gazownictwo', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3005&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Farmacja/ Chemia/ Biologia')
+        'Farmacja/ Chemia/ Biologia', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3006&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Finanse/ Bankowosć/ Ubezpieczenia')
+        'Finanse/ Bankowosć/ Ubezpieczenia', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3007&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='FMCG')
+        'FMCG', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3008&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Gospodarstwo Domowe, naprawy i drobne uslugi')
+        'Gospodarstwo Domowe, naprawy i drobne uslugi', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3009&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='HR/ Szkolenia/ Edukacja')
+        'HR/ Szkolenia/ Edukacja', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3010&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Instytucje sektora publicznego')
+        'Instytucje sektora publicznego', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3011&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Inzynieria/ Konstrukcje/ Technologie')
+        'Inzynieria/ Konstrukcje/ Technologie', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3012&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='IT/ Telekomunikacja/ Internet')
+        'IT/ Telekomunikacja/ Internet', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3013&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Kadra zarzadzajaca')
+        'Kadra zarzadzajaca', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3014&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Komputery/ Sprzet elektroniczny i optyczny')
+        'Komputery/ Sprzet elektroniczny i optyczny', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3014&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Konsulting/ Audyt')
+        'Konsulting/ Audyt', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3016&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Kopalnie/ Przemysl wydobywczy')
+        'Kopalnie/ Przemysl wydobywczy', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3017&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Ksiegowosć')
+        'Ksiegowosć', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3018hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Lotnictwo')
+        'Lotnictwo', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3019&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Marketing/ Reklama/ PR')
+        'Marketing/ Reklama/ PR', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3020&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Maszyny io wyposazenie: instalacja i naprawy')
+        'Maszyny io wyposazenie: instalacja i naprawy', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3021&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Media/ Sztuka/ Rozrywka')
+        'Media/ Sztuka/ Rozrywka', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3022&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Medycyna/ Opieka zdrowotna')
+        'Medycyna/ Opieka zdrowotna', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3023&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Nieruchomosci')
+        'Nieruchomosci', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3024&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Obsluga klienta/ Call Center')
+        'Obsluga klienta/ Call Center', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3025&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Ochrona osob i mienia')
+        'Ochrona osob i mienia', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3026&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Ochrona srodowiska')
+        'Ochrona srodowiska', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3027&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Organizacje pozytku publicznego')
+        'Organizacje pozytku publicznego', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3028&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Pojazdy mechaniczne')
+        'Pojazdy mechaniczne', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3029&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Pojazdy mechaniczne, czesci i akcesoria: sprzedaz i naprawy')
+        'Pojazdy mechaniczne, czesci i akcesoria: sprzedaz i naprawy', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3030&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Przemysl hutniczny i metalurgiczny')
+        'Przemysl hutniczny i metalurgiczny', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3031&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Przemysl lekki')
+        'Przemysl lekki', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3032&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Przemysl papierniczy')
+        'Przemysl papierniczy', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3033&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Przemysl stoczniowy i kolejowy')
+       'Przemysl stoczniowy i kolejowy', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3034&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Restauracje/ Hotele')
+        'Restauracje/ Hotele', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3035&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Rolnictwo/ Lesnictwo/ Rybolostwo')
+        'Rolnictwo/ Lesnictwo/ Rybolostwo', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3036&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Sprzedaz detaliczna')
+        'Sprzedaz detaliczna', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3037&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Sprzedaz hurtowa')
+        'Sprzedaz hurtowa', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3038&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Szklo/ Ceramika/ Wyroby mineralne')
+        'Szklo/ Ceramika/ Wyroby mineralne', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3039&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Transport/ Logistyka')
+        'Transport/ Logistyka', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3040&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Uslugi prawne')
+        'Uslugi prawne', 'Manpower')
     manpower_pl(
         'https://www.manpower.pl/szukaj-pracy/oferty-pracy/?hrlink_query=&hrlink_category=3041&hrlink_location=&hrlink_type=&hrlink_submitSearch=1',
-        name='Uslugi wodociagowe, kanalizacyjne i gospodarka odpadami')
+        'Uslugi wodociagowe, kanalizacyjne i gospodarka odpadami', 'Manpower')
 
-def manpower_export():
+def manpower_export(company_name):
     global m
     test = []
 
@@ -168,14 +170,14 @@ def manpower_export():
         test.append( event_obj )
 
     try:
-        os.remove( 'export/manpower.csv' )
-        with open( 'export/manpower.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+        os.remove( 'export/%s.csv' %company_name )
+        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8') as csvfile:
             fields = ['category', 'offerts']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()
             writer.writerows( test )
     except:
-        with open( 'export/manpower.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8' ) as csvfile:
             fields = ['company_name', 'category', 'offers']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()

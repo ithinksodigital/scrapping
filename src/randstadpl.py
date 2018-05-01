@@ -6,7 +6,7 @@ import csv
 
 ra = []
 
-def randstad_pl(string, name=""):
+def randstad_pl(string, name="", company_name=''):
     try:
         page_response = requests.get('https://www.randstad.pl/znajdz-prace/s-%s' %string, timeout=5).text
         page_content = BeautifulSoup(page_response, 'lxml')
@@ -15,51 +15,53 @@ def randstad_pl(string, name=""):
         rm_str = re.sub('[^0-9]', '', data_into_str)
 
         new_entry = {
-            "company_name": "Randstad",
+            "company_name": company_name,
             "category": name,
             "offers": int( rm_str )
         }
     except:
 
         new_entry = {
-            "company_name": "Randstad",
+            "company_name": company_name,
             "category": name,
             "offers": "not received"
         }
 
     ra.extend( [new_entry] )
+    return company_name
+    return ra
 
 def randstad_scrap():
-    randstad_pl('produkcja/','produkcja' )
-    randstad_pl('it-administracja/', 'IT - administracja')
-    randstad_pl('it-rozwoj-oprogramowania', 'it - rozwoj oprogramowania')
-    randstad_pl('administracja-biurowa', 'administracja biurowa')
-    randstad_pl( 'badania-i-rozwoj', 'badania i rozwoj' )
-    randstad_pl( 'bankowosc', 'bankowosc' )
-    randstad_pl( 'budownictwo', 'budownictwo' )
-    randstad_pl( 'call-center', 'call center' )
-    randstad_pl( 'doradztwo-konsulting', 'doradztwo/konsulting' )
-    randstad_pl( 'edukacja-szkolenia', 'edukacja/szkolenia' )
-    randstad_pl( 'finanse-ekonomia', 'finanse/ekonomia' )
-    randstad_pl( 'hotelarstwo-gastronomia-turystyka', 'hotelarstwo/gastronomia/turystyka' )
-    randstad_pl('human-resources-zasoby-ludzkie', 'human resources/zasoby ludzkie')
-    randstad_pl('inne', 'inne')
-    randstad_pl('inzynieria', 'inzynieria')
-    randstad_pl( 'magazyn', 'magazyn' )
-    randstad_pl( 'marketing', 'marketing' )
-    randstad_pl( 'nieruchomosci', 'nieruchomosci' )
-    randstad_pl( 'obsluga-klienta', 'obsluga klienta' )
-    randstad_pl( 'produkcja', 'produkcja' )
-    randstad_pl( 'reklama-grafika-kreacja-fotografia', 'reklama/grafika/kreacja/fotografia' )
-    randstad_pl( 'sprzedaz', 'sprzedaz' )
-    randstad_pl( 'transport-spedycja-logistyka', 'transport/spedycja/logistyka')
-    randstad_pl( 'ubezpieczenia', 'ubezpieczenia' )
-    randstad_pl( 'uslugi', 'uslugi' )
-    randstad_pl( 'zakupy', 'zakupy' )
-    randstad_pl( 'lancuch-dostaw', 'lancuch dostaw' )
+    randstad_pl('produkcja/','produkcja', 'Randstad' )
+    randstad_pl('it-administracja/', 'IT - administracja', 'Randstad')
+    randstad_pl('it-rozwoj-oprogramowania', 'it - rozwoj oprogramowania', 'Randstad')
+    randstad_pl('administracja-biurowa', 'administracja biurowa', 'Randstad')
+    randstad_pl( 'badania-i-rozwoj', 'badania i rozwoj', 'Randstad' )
+    randstad_pl( 'bankowosc', 'bankowosc', 'Randstad')
+    randstad_pl( 'budownictwo', 'budownictwo' , 'Randstad')
+    randstad_pl( 'call-center', 'call center', 'Randstad' )
+    randstad_pl( 'doradztwo-konsulting', 'doradztwo/konsulting' , 'Randstad')
+    randstad_pl( 'edukacja-szkolenia', 'edukacja/szkolenia' , 'Randstad')
+    randstad_pl( 'finanse-ekonomia', 'finanse/ekonomia', 'Randstad' )
+    randstad_pl( 'hotelarstwo-gastronomia-turystyka', 'hotelarstwo/gastronomia/turystyka' , 'Randstad')
+    randstad_pl('human-resources-zasoby-ludzkie', 'human resources/zasoby ludzkie', 'Randstad')
+    randstad_pl('inne', 'inne', 'Randstad')
+    randstad_pl('inzynieria', 'inzynieria', 'Randstad')
+    randstad_pl( 'magazyn', 'magazyn' , 'Randstad')
+    randstad_pl( 'marketing', 'marketing' , 'Randstad')
+    randstad_pl( 'nieruchomosci', 'nieruchomosci' , 'Randstad')
+    randstad_pl( 'obsluga-klienta', 'obsluga klienta' , 'Randstad')
+    randstad_pl( 'produkcja', 'produkcja' , 'Randstad')
+    randstad_pl( 'reklama-grafika-kreacja-fotografia', 'reklama/grafika/kreacja/fotografia' , 'Randstad')
+    randstad_pl( 'sprzedaz', 'sprzedaz' , 'Randstad')
+    randstad_pl( 'transport-spedycja-logistyka', 'transport/spedycja/logistyka', 'Randstad')
+    randstad_pl( 'ubezpieczenia', 'ubezpieczenia' , 'Randstad')
+    randstad_pl( 'uslugi', 'uslugi' , 'Randstad')
+    randstad_pl( 'zakupy', 'zakupy' , 'Randstad')
+    randstad_pl( 'lancuch-dostaw', 'lancuch dostaw' , 'Randstad')
 
 
-def randstad_export():
+def randstad_export(company_name):
     global ra
     test = []
 
@@ -71,14 +73,14 @@ def randstad_export():
         test.append( event_obj )
 
     try:
-        os.remove( 'export/randstad.csv' )
-        with open( 'export/randstad.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
-            fields = ['category', 'offerts']
+        os.remove( 'export/%s.csv' %company_name )
+        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8') as csvfile:
+            fields = ['category', 'offers']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()
             writer.writerows( test )
     except:
-        with open( 'export/randstad.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8' ) as csvfile:
             fields = ['company_name', 'category', 'offers']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()

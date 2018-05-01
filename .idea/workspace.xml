@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ccecf33-a68c-43b1-b0e6-175e361cf874" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/export/grafton.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/export/hays.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/export/manpower.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/export/randstad.csv" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/antalpl.py" afterPath="$PROJECT_DIR$/src/antalpl.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/experispl.py" afterPath="$PROJECT_DIR$/src/experispl.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/graftonpl.py" afterPath="$PROJECT_DIR$/src/graftonpl.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hayspl.py" afterPath="$PROJECT_DIR$/src/hayspl.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hrkpl.py" afterPath="$PROJECT_DIR$/src/hrkpl.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/manpower.py" afterPath="$PROJECT_DIR$/src/manpower.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/randstadpl.py" afterPath="$PROJECT_DIR$/src/randstadpl.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/company.html" afterPath="$PROJECT_DIR$/templates/company.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,21 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-450">
-              <caret line="10" column="43" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="company.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/company.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="40" column="33" lean-forward="true" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
+            <state relative-caret-position="434">
+              <caret line="76" column="10" lean-forward="true" selection-start-line="68" selection-start-column="4" selection-end-line="76" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -56,12 +47,18 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>btn btn-outline-secondary</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/templates/company.html" />
       </list>
@@ -226,11 +223,12 @@
       <workItem from="1525027518231" duration="3716000" />
       <workItem from="1525120305926" duration="1950000" />
       <workItem from="1525155741686" duration="5519000" />
+      <workItem from="1525180723629" duration="6027000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11185000" />
+    <option name="totallyTimeSpent" value="17212000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -276,15 +274,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-450">
+        <state relative-caret-position="170">
           <caret line="10" column="43" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="43" />
           <folding />
         </state>
@@ -294,6 +284,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="40" column="33" lean-forward="true" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-424">
+          <caret line="53" column="4" lean-forward="false" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/company.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="76" column="10" lean-forward="true" selection-start-line="68" selection-start-column="4" selection-end-line="76" selection-end-column="10" />
           <folding />
         </state>
       </provider>

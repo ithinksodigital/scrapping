@@ -28,7 +28,7 @@
             display: block;
         }
 
-        .btn {
+        .list-group-item {
             text-align: left;
         }
 
@@ -36,34 +36,44 @@
 </head>
 <body>
 <div class="container">
-	<div class="row block">
-		<div class="col-xs-6 block">
-		  		<div class="btn-group block btn-group-md btn-group-vertical" role="group" aria-label="Basic example">
-				  <a class="btn btn-outline-secondary" href="{{ url_for('pracuj') }} " target="_blank" >Pracuj.pl</a>
-				  <a class="btn btn-outline-secondary" href="{{ url_for('praca') }} " target="_blank">Praca.pl</a>
-				  <a class="btn btn-outline-secondary" href="{{ url_for('infopraca') }}" target="_blank">Infopraca.pl</a>
-				  <a class="btn btn-outline-secondary" href="{{ url_for('goldenline') }}" target="_blank">GoldenLine</a>
-				  <a class="btn btn-outline-secondary disabled">Linkedin</a>
+	<div class="row ">
+        <div class="col"></div>
+        <div class="col-6">
+		  		<div class="list-group">
+				  <a class="list-group-item list-group-item-action" href="{{ url_for('pracuj') }} " target="_blank" >Pracuj.pl</a>
+				  <a class="list-group-item list-group-item-action " href="{{ url_for('praca') }} " target="_blank">Praca.pl</a>
+				  <a class="list-group-item list-group-item-action " href="{{ url_for('infopraca') }}" target="_blank">Infopraca.pl</a>
+				  <a class="list-group-item list-group-item-action " href="{{ url_for('goldenline') }}" target="_blank">GoldenLine</a>
+				  <a class="list-group-item list-group-item-action list-group-item-warning disabled">Linkedin</a>
 				</div>
         </div>
-		<div class="col-xs-6 block">
-				<div class="btn-group block btn-group-md btn-group-vertical" role="group" aria-label="Basic example">
-					<a class="btn btn-outline-secondary" href="{{ url_for('hays') }}" target="_blank">Hays</a>
-					<a class="btn btn-outline-secondary" href="{{ url_for('antal') }}" target="_blank">Antal</a>
-					<a class="btn btn-outline-secondary" href="{{ url_for('randstad') }}" target="_blank">Randstad</a>
-					<a class="btn btn-outline-secondary" href="{{ url_for('experis') }}" target="_blank">Experis</a>
-					<a class="btn btn-outline-secondary" href="{{ url_for('manpower') }}" target="_blank">Manpower</a>
-					<a class="btn btn-outline-secondary" href="{{ url_for('grafton') }}" target="_blank">Grafton</a>
-					<a class="btn btn-outline-secondary" href="https://devire.pl" target="_blank">Devire</a>
-				</div>
-        </div>
+        <div class="col"></div>
     </div>
-    <div class="row block">
-        <div class="col-xs-12 block">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+				<div class="list-group">
+					<a class="list-group-item list-group-item-action " href="{{ url_for('hays') }}" target="_blank">Hays</a>
+					<a class="list-group-item list-group-item-action " href="{{ url_for('antal') }}" target="_blank">Antal</a>
+					<a class="list-group-item list-group-item-action " href="{{ url_for('randstad') }}" target="_blank">Randstad</a>
+					<a class="list-group-item list-group-item-action " href="{{ url_for('experis') }}" target="_blank">Experis</a>
+					<a class="list-group-item list-group-item-action " href="{{ url_for('manpower') }}" target="_blank">Manpower</a>
+					<a class="list-group-item list-group-item-action " href="{{ url_for('hrk') }}" target="_blank">HRK</a>
+					<a class="list-group-item list-group-item-action " href="{{ url_for('michaelpage') }}" target="_blank">Michael Page</a>
+					<a class="list-group-item list-group-item-action " href="{{ url_for('grafton') }}" target="_blank">Grafton</a>
+					<a class="list-group-item list-group-item-action " href="https://devire.pl" target="_blank">Devire</a>
+				</div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
             <a class="btn btn-social btn-github block" href="https://github.com/radipawelec/scrapping" target="_blank">
                 <span class="fab fa-github"></span>
                 RadiPawelec - GitHub repository</a>
         </div>
+        <div class="col"></div>
     </div>
 </div>
 

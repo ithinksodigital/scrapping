@@ -16,6 +16,7 @@
     <style type="text/css" media="screen">
         .row {
             padding-top: 25px;
+            padding-bottom: 5px;
         }
         .col-xs-6 {
             padding: 15px;
@@ -26,7 +27,7 @@
             display: block;
         }
 
-        .btn {
+        .list-group-item {
             text-align: left;
         }
 
@@ -39,18 +40,26 @@
         <div class="col"></div>
         <div class="col-6">
             <div class="list-group">
+                <a href="{{ url_for('index') }}" class="list-group-item list-group-item-action list-group-item-info">Dashboard</a>
+                <a href="{{ url_for('plot_csv', company_name = company_name ) }}" class="list-group-item list-group-item-action list-group-item-primary">Download CSV data</a>
                 {% for item in data %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                    {{item.category}}
                     <span class="badge badge-primary badge-pill">{{item.offers}}</span>
                 </li>
                 {% endfor %}
-                <a href="{{ url_for('plot_csv', company_name = company_name ) }}" class="list-group-item list-group-item-action list-group-item-primary">Download CSV data</a>
             </div>
         </div>
         <div class="col"></div>
     </div>
-
-
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+            <a class="btn btn-social btn-github block" href="https://github.com/radipawelec/scrapping" target="_blank">
+                <span class="fab fa-github"></span>
+                RadiPawelec - GitHub repository</a>
+        </div>
+        <div class="col"></div>
+    </div>
 </body>
 </html>

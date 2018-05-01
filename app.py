@@ -11,6 +11,7 @@ from randstadpl import *
 from hrkpl import *
 from hayspl import *
 from experispl import *
+from michaelpagepl import *
 
 
 app = Flask(__name__)
@@ -45,12 +46,20 @@ def infopraca():
 
     return jsonify(i)
 
+@app.route('/michaelpage')
+def michaelpage():
+    company_name='Michael Page'
+    michaelpage_scrap()
+    michaelpage_export('Michael Page')
+    return render_template( 'company.html', data=mp, company_name=company_name )
+
 
 @app.route('/manpower')
 def manpower():
+    company_name = "Manpower"
     manpower_scrap()
-    manpower_export()
-    return jsonify(m)
+    manpower_export('Manpower')
+    return render_template('company.html', data=m, company_name=company_name)
 
 @app.route('/experis')
 def experis():
@@ -66,32 +75,36 @@ def antal():
 
     company_name='Antal'
     antal_scrap()
-    antal_export()
+    antal_export('Antal')
     return render_template('company.html', data=a, company_name=company_name)
 
 @app.route('/grafton')
 def grafton():
+    company_name='Grafton'
     grafton_scrap()
-    grafton_export()
-    return jsonify(g)
+    grafton_export('Grafton')
+    return render_template('company.html', data=g, company_name=company_name)
 
 @app.route('/randstad')
 def randstad():
+    company_name='Randstad'
     randstad_scrap()
-    randstad_export()
-    return jsonify(ra)
+    randstad_export('Randstad')
+    return render_template('company.html', data=ra, company_name=company_name)
 
 @app.route('/hrk')
 def hrk():
+    company_name = 'HRK'
     hrk_scrap()
-    hrk_export()
-    return jsonify(h)
+    hrk_export('HRK')
+    return render_template('company.html', data=h, company_name=company_name)
 
 @app.route('/hays')
 def hays():
+    company_name='Hays'
     hays_scrap()
-    hays_export()
-    return jsonify(ha)
+    hays_export('Hays')
+    return render_template('company.html', data=ha, company_name=company_name)
 
 
 @app.route('/getCSV', methods=['GET'])
