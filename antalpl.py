@@ -78,7 +78,7 @@ def antal_scrap():
         'Zarzadzanie IT' )
 
 
-def antal_export():
+def antal_export(company_name):
     global a
     test = []
 
@@ -90,14 +90,14 @@ def antal_export():
         test.append( event_obj )
 
     try:
-        os.remove( 'export/antal.csv' )
-        with open( 'export/antal.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+        os.remove( 'export/%s.csv' %company_name )
+        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8') as csvfile:
             fields = ['category', 'offerts']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()
             writer.writerows( test )
     except:
-        with open( 'export/antal.csv', 'w', newline='', encoding='utf-8' ) as csvfile:
+        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8' ) as csvfile:
             fields = ['company_name', 'category', 'offers']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()
