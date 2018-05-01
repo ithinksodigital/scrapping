@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 	<style type="text/css" media="screen">
@@ -32,19 +33,35 @@
             text-align: left;
         }
 
+        div#loading {
+            margin: 0 auto;
+            width: 449px;
+            height: 291px;
+            display: none;
+            background-image: url('static/img/Loading_icon.gif') }}) no-repeat;
+            background-size: auto;
+            cursor: wait;
+        }
+
 	</style>
 </head>
 <body>
-<div class="container">
+<div class="col" id="loading">
+    <div class="alert alert-info" role="alert">
+        Loading data...
+    </div>
+</div>
+
+<div id="content" class="container">
 	<div class="row ">
         <div class="col"></div>
         <div class="col-6">
 		  		<div class="list-group">
-				  <a class="list-group-item list-group-item-action" href="{{ url_for('pracuj') }} " target="_blank" >Pracuj.pl</a>
-				  <a class="list-group-item list-group-item-action " href="{{ url_for('praca') }} " target="_blank">Praca.pl</a>
-				  <a class="list-group-item list-group-item-action " href="{{ url_for('infopraca') }}" target="_blank">Infopraca.pl</a>
-				  <a class="list-group-item list-group-item-action " href="{{ url_for('goldenline') }}" target="_blank">GoldenLine</a>
-				  <a class="list-group-item list-group-item-action list-group-item-warning disabled">Linkedin</a>
+				  <a class="btn btn-outline-secondary" href="{{ url_for('pracuj') }} " type="submit" value="Submit" onclick="loading();" target="" >Pracuj.pl</a>
+				  <a class="btn btn-outline-secondary  " href="{{ url_for('praca') }} " type="submit" value="Submit" onclick="loading();"target="">Praca.pl</a>
+				  <a class="btn btn-outline-secondary  " href="{{ url_for('infopraca') }}" type="submit" value="Submit" onclick="loading();"target="">Infopraca.pl</a>
+				  <a class="btn btn-outline-secondary  " href="{{ url_for('goldenline') }}" type="submit" value="Submit" onclick="loading();"target="">GoldenLine</a>
+				  <a class="btn btn-outline-secondary  btn btn-outline-warning disabled" type="submit" value="Submit" onclick="loading();">Linkedin</a>
 				</div>
         </div>
         <div class="col"></div>
@@ -53,15 +70,15 @@
         <div class="col"></div>
         <div class="col-6">
 				<div class="list-group">
-					<a class="list-group-item list-group-item-action " href="{{ url_for('hays') }}" target="_blank">Hays</a>
-					<a class="list-group-item list-group-item-action " href="{{ url_for('antal') }}" target="_blank">Antal</a>
-					<a class="list-group-item list-group-item-action " href="{{ url_for('randstad') }}" target="_blank">Randstad</a>
-					<a class="list-group-item list-group-item-action " href="{{ url_for('experis') }}" target="_blank">Experis</a>
-					<a class="list-group-item list-group-item-action " href="{{ url_for('manpower') }}" target="_blank">Manpower</a>
-					<a class="list-group-item list-group-item-action " href="{{ url_for('hrk') }}" target="_blank">HRK</a>
-					<a class="list-group-item list-group-item-action " href="{{ url_for('michaelpage') }}" target="_blank">Michael Page</a>
-					<a class="list-group-item list-group-item-action " href="{{ url_for('grafton') }}" target="_blank">Grafton</a>
-					<a class="list-group-item list-group-item-action " href="https://devire.pl" target="_blank">Devire</a>
+					<a class="btn btn-outline-secondary  " href="{{ url_for('hays') }}" type="submit" value="Submit" onclick="loading();"target="">Hays</a>
+					<a class="btn btn-outline-secondary  " href="{{ url_for('antal') }}" type="submit" value="Submit" onclick="loading();"target="">Antal</a>
+					<a class="btn btn-outline-secondary  " href="{{ url_for('randstad') }}"type="submit" value="Submit" onclick="loading();" target="">Randstad</a>
+					<a class="btn btn-outline-secondary  " href="{{ url_for('experis') }}" type="submit" value="Submit" onclick="loading();"target="">Experis</a>
+					<a class="btn btn-outline-secondary  " href="{{ url_for('manpower') }}" type="submit" value="Submit" onclick="loading();"target="">Manpower</a>
+					<a class="btn btn-outline-secondary  " href="{{ url_for('hrk') }}" type="submit" value="Submit" onclick="loading();"target="">HRK</a>
+					<a class="btn btn-outline-secondary  " href="{{ url_for('michaelpage') }}" type="submit" value="Submit" onclick="loading();"target="">Michael Page</a>
+					<a class="btn btn-outline-secondary  " href="{{ url_for('grafton') }}"type="submit" value="Submit" onclick="loading();"s target="">Grafton</a>
+					<a class="btn btn-outline-secondary  " href="https://devire.pl" type="submit" value="Submit" onclick="loading();" target="">Devire</a>
 				</div>
         </div>
         <div class="col"></div>
@@ -76,6 +93,13 @@
         <div class="col"></div>
     </div>
 </div>
+
+<script type="text/javascript">
+function loading(){
+    $("#loading").show();
+    $("#content").hide();
+}
+</script>
 
 
 </body>
