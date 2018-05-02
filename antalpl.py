@@ -90,14 +90,14 @@ def antal_export(company_name):
         test.append( event_obj )
 
     try:
-        os.remove( '%s.csv' %company_name )
-        with open( '%s.csv' %company_name, 'w', newline='', encoding='utf-8') as csvfile:
+        os.remove( 'export/%s.csv' %company_name )
+        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8') as csvfile:
             fields = ['category', 'offerts']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()
             writer.writerows( test )
     except:
-        with open( '%s.csv' %company_name, 'w', newline='', encoding='utf-8' ) as csvfile:
+        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8' ) as csvfile:
             fields = ['company_name', 'category', 'offers']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()
