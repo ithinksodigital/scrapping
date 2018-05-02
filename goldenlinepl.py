@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 
-g = {}
+gl = {}
 
 def golden_line(link, name=''):
     try:
@@ -21,7 +21,7 @@ def golden_line(link, name=''):
             name: "0"
         }
 
-    g.update(new_entry)
+    gl.update(new_entry)
 
 def goldenline_scrap():
     golden_line('https://www.goldenline.pl/praca/szukaj?query=hays+poland', name='Hays')

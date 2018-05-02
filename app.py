@@ -37,7 +37,7 @@ def praca():
 @app.route('/goldenline')
 def goldenline():
     goldenline_scrap()
-    return jsonify(g)
+    return jsonify(gl)
 
 @app.route('/infopraca')
 def infopraca():
