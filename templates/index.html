@@ -58,8 +58,8 @@
         <div class="col-6">
 		  		<div class="list-group">
                 <form id="myForm" method="post">
-                    <input type="submit" value="Submit" />
-                    <a lass="btn btn-outline-secondary" href="{{ url_for('pracuj') }}" onclick="loading()">Pracuj form</a>
+                    <input type="hidden" value="Submit" />
+                    <a class="btn btn-outline-secondary" href="{{ url_for('pracuj') }}" onclick="loading()">Pracuj form</a>
                 </form>
 				  <a class="btn btn-outline-secondary" href="{{ url_for('pracuj') }} " >Pracuj.pl</a>
 				  <a class="btn btn-outline-secondary  " href="{{ url_for('praca') }} " type="submit" value="Submit" onclick="loading();"target="">Praca.pl</a>
