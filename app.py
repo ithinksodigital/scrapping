@@ -16,8 +16,6 @@ from michaelpagepl import *
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
-+basepath = os.path.abspath("/export")
-
 
 
 @app.route('/')
