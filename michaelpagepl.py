@@ -8,7 +8,7 @@ mp = []
 
 def michaelpage_pl(string, name="", company_name='Michael Page'):
     try:
-        page_response = requests.get('https://www.michaelpage.pl/jobs/%s' %string, timeout=5).text
+        page_response = requests.get('https://www.michaelpage.pl/jobs/%s' %string, timeout=30).text
         page_content = BeautifulSoup(page_response, 'lxml')
         data = page_content.select('div.no-of-jobs > span')
         data_into_str = data[0].text.strip()
