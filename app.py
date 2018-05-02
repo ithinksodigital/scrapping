@@ -33,7 +33,6 @@ def praca():
     praca_scrap()
     return jsonify(pr)
 
-
 @app.route('/goldenline')
 def goldenline():
     goldenline_scrap()
