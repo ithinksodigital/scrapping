@@ -107,7 +107,7 @@ def hays():
 @app.route('/getCSV', methods=['GET'])
 def plot_csv():
     company_name = request.args.get( 'company_name' )
-    return send_file('export/%s.csv' %company_name,
+    return send_file('%s.csv' %company_name,
                      mimetype='text/csv',
                      attachment_filename='%s.csv' %company_name,
                      as_attachment=True)
