@@ -50,6 +50,8 @@ def michaelpage_scrap():
     michaelpage_pl( 'sales', 'Sales', 'Michael Page' )
 
 def michaelpage_export(company_name):
+    path = '/home/jobad/scrapping/export/{}.csv'.format( company_name )
+
     global mp
     test = []
 
@@ -61,14 +63,14 @@ def michaelpage_export(company_name):
         test.append( event_obj )
 
     try:
-        os.remove( 'export/%s.csv' %company_name )
-        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8') as csvfile:
+        os.remove( path )
+        with open( path, 'w', newline='', encoding='utf-8') as csvfile:
             fields = ['category', 'offers']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()
             writer.writerows( test )
     except:
-        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8' ) as csvfile:
+        with open( path, 'w', newline='', encoding='utf-8' ) as csvfile:
             fields = ['company_name', 'category', 'offers']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()

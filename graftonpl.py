@@ -49,6 +49,8 @@ def grafton_scrap():
     grafton_pl('budownictwo-zarzadzanie-nieruchomosciami ', 'Budownictwo & Zarzadzanie Nieruchomosciami', 'Grafton')
 
 def grafton_export(company_name):
+    path = '/home/jobad/scrapping/export/{}.csv'.format( company_name )
+
     global g
     test = []
 
@@ -60,14 +62,14 @@ def grafton_export(company_name):
         test.append( event_obj )
 
     try:
-        os.remove( 'export/%s.csv' %company_name )
-        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8') as csvfile:
+        os.remove( path )
+        with open( path, 'w', newline='', encoding='utf-8') as csvfile:
             fields = ['category', 'offerts']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()
             writer.writerows( test )
     except:
-        with open( 'export/%s.csv' %company_name, 'w', newline='', encoding='utf-8' ) as csvfile:
+        with open(path, 'w', newline='', encoding='utf-8' ) as csvfile:
             fields = ['company_name', 'category', 'offers']
             writer = csv.DictWriter( csvfile, fieldnames=fields, delimiter=';' )
             writer.writeheader()
